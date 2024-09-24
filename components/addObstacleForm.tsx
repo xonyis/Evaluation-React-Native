@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TextInput, View, Button} from 'react-native';
+import { ScrollView, Image, StyleSheet, Text, TextInput, View, Button} from 'react-native';
 import  React, {useState, useEffect} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
@@ -13,7 +13,6 @@ export default function addObstacleForm() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [resetImageFlag, setResetImageFlag] = useState(false);  // Flag pour réinitialiser l'image
-    const [showMap, setShowMap] = useState(false);  // Pour afficher ou non la carte
 
     const obstacle = {
         id: Date.now(), 
@@ -56,7 +55,7 @@ export default function addObstacleForm() {
       let location = await Location.getCurrentPositionAsync({});
       setLatitude(location.coords.latitude.toString());
       setLongitude(location.coords.longitude.toString());
-      setShowMap(true);  
+
     } catch (error) {
       alert('Impossible de récupérer la localisation');
       console.error(error);
@@ -67,7 +66,7 @@ export default function addObstacleForm() {
   const resetLongLat = () => {
     setLatitude('')
     setLongitude('')
-    setShowMap(false);
+
   }
 
   const reset = () => {
@@ -76,11 +75,16 @@ export default function addObstacleForm() {
     setImgUrl('');
     setLatitude('')
     setLongitude('')
+    setResetImageFlag(true);
+    setTimeout(() => {
+      setResetImageFlag(false);
+    }, 100);
   }
 
   
 
   return (
+    <ScrollView contentContainerStyle={styles.scrollViewContainer}>
     <View style={styles.formContainer}>
       <Text style={styles.title}>Ajouter un Obstacle</Text>
 
@@ -146,7 +150,7 @@ export default function addObstacleForm() {
       </View>
       </View>
         
-      <ImagePickerComponent onImagePicked={setImgUrl} />
+      <ImagePickerComponent onImagePicked={setImgUrl} resetImage={resetImageFlag}/>
       
       <View style={[{marginTop: 20, display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}]}>
       <ButtonWithIcon 
@@ -170,19 +174,28 @@ export default function addObstacleForm() {
         />
       </View>
     </View>
+    </ScrollView>
+
   );
 }
 
 const styles = StyleSheet.create({
+  scrollViewContainer: {
+    flexGrow: 1, // Permet au contenu de s'étendre verticalement
+    justifyContent: 'center',
+    padding: 10,
+  },
+
   formContainer: {
     marginTop: 50,
-    padding: 20
+    padding: 20,
+    
   },
   locationContainer: {
     borderWidth: 1,
     padding: 10,
     borderRadius: 7,
-    marginTop: 10
+    marginTop: 10,
   },
   inputLocationContainer: {
     display: 'flex',
