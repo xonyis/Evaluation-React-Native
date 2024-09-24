@@ -4,13 +4,7 @@ import AddObstacleForm from '@/components/addObstacleForm';
 
 
 
-export default function HomeScreen() {
-  const [text, onChangeText] = React.useState('Useless Text');
-
-  const submitObstacle = () => {
-    alert('yoooo')
-  }
-
+export default function AddScreen() {
 
   return (
     <View>

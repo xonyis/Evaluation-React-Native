@@ -53,13 +53,13 @@ export default function HomeScreen() {
 
   const Item = ({ name, description, img, id, coordoneY, coordoneX }: Obstacle) => (
     <View style={styles.item}>
+      <Button title="Supprimer" color="red" onPress={() => deleteObstacle(id)} />
       <Text style={styles.title}>{id}</Text>
       <Text style={styles.title}>{name}</Text>
       <Text style={styles.title}>{description}</Text>
       <Image source={{ uri: img }} style={styles.image} />
       <Text style={styles.title}>Latitude : {coordoneX}</Text>
       <Text style={styles.title}>Longitude : {coordoneY}</Text>
-      <Button title="Supprimer" color="red" onPress={() => deleteObstacle(id)} />
     </View>
   );
   
