@@ -13,6 +13,7 @@ export default function addObstacleForm() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [resetImageFlag, setResetImageFlag] = useState(false);  // Flag pour réinitialiser l'image
+    const [showMap, setShowMap] = useState(false);  // Pour afficher ou non la carte
 
     const obstacle = {
         id: Date.now(), 
@@ -55,7 +56,7 @@ export default function addObstacleForm() {
       let location = await Location.getCurrentPositionAsync({});
       setLatitude(location.coords.latitude.toString());
       setLongitude(location.coords.longitude.toString());
-
+      setShowMap(true);  
     } catch (error) {
       alert('Impossible de récupérer la localisation');
       console.error(error);
@@ -66,6 +67,7 @@ export default function addObstacleForm() {
   const resetLongLat = () => {
     setLatitude('')
     setLongitude('')
+    setShowMap(false);
   }
 
   const reset = () => {
@@ -140,7 +142,7 @@ export default function addObstacleForm() {
         placeholder="Longitude"
         keyboardType="numeric"
       />
-      
+
       </View>
       </View>
         
@@ -214,7 +216,5 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7
   },
-  btnSubmit:{
-    backgroundColor: 'red'
-  }
+
 });

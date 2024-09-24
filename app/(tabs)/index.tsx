@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import  React, {useState, useEffect} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import ButtonWithIcon from '@/components/ButtonWithIcon';
-
+import MapComponent from '@/components/MapComponent';
 
 type Obstacle = {
   id: number;
@@ -59,10 +59,13 @@ export default function HomeScreen() {
         <ButtonWithIcon title="" color="red" onPress={() => deleteObstacle(id)} width={45} iconColor='white' iconName='close-circle-outline' />
       </View>
       <Text style={styles.description}>Description : {description}</Text>
-      <Text style={styles.description}>Latitude : {coordoneX}</Text>
-      <Text style={styles.description}>Longitude : {coordoneY}</Text>
-      
+      {/* <Text style={styles.description}>Latitude : {coordoneX}</Text>
+      <Text style={styles.description}>Longitude : {coordoneY}</Text> */}
       {img && <Image source={{ uri: img }} style={styles.image} />}
+
+      { coordoneY && coordoneX && (
+          <MapComponent latitude={coordoneX} longitude={coordoneY} />
+        )}
     </View>
   );
   
