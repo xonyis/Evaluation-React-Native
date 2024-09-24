@@ -5,6 +5,7 @@ import * as Location from 'expo-location';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import ButtonWithIcon from './ButtonWithIcon';
 import ImagePickerComponent from './ImagePickerComponent'
+import { useRouter } from 'expo-router'; // Importer useRouter
 
 export default function addObstacleForm() {
     const [text, onChangeText] = useState('');
@@ -13,6 +14,7 @@ export default function addObstacleForm() {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [resetImageFlag, setResetImageFlag] = useState(false);  // Flag pour réinitialiser l'image
+    const router = useRouter(); // Utiliser useRouter pour naviguer
 
     const obstacle = {
         id: Date.now(), 
@@ -50,6 +52,8 @@ export default function addObstacleForm() {
       setImgUrl('');
       setLatitude('')
       setLongitude('')
+      router.push('/'); // Naviguer vers l'onglet "Home"
+
     } catch (e) {
       alert('Failed to save the data to the storage')
     }

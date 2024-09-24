@@ -54,7 +54,6 @@ export default function ImagePickerComponent({ onImagePicked, resetImage }: { on
           title=""
         />              
         </View>
-
               {image && <Image source={{ uri: image }} style={styles.image} />}
             </View>
     )
