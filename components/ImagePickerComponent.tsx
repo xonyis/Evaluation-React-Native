@@ -35,10 +35,26 @@ export default function ImagePickerComponent({ onImagePicked, resetImage }: { on
     }
   }, [resetImage]);
 
+  const resetImg = () => {
+    setImage(null);
+      onImagePicked('')
+  }
 
     return (
             <View style={styles.container}>
-              <ButtonWithIcon title="" iconName='images-outline' color='#0066FF' iconColor='white' width={50} height={50} onPress={pickImage} />
+              <View style={[{gap: 10, display: 'flex', justifyContent: 'space-between'}]}>
+                <ButtonWithIcon title="" iconName='images-outline' color='#0066FF' iconColor='white' width={50} height={50} onPress={pickImage} />
+                <ButtonWithIcon 
+          onPress={resetImg} 
+          iconName="close-circle-outline" 
+          color='#e63946'
+          iconColor='white'
+          width={50}
+          height={50}
+          title=""
+        />              
+        </View>
+
               {image && <Image source={{ uri: image }} style={styles.image} />}
             </View>
     )

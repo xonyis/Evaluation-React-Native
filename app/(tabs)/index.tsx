@@ -58,9 +58,12 @@ export default function HomeScreen() {
         <Text style={styles.title}>Obstacle : {name}</Text>
         <ButtonWithIcon title="" color="" onPress={() => deleteObstacle(id)} width={45} iconColor='#e63946' iconName='close-circle-outline' />
       </View>
+      <View style={styles.imgDescContainer}>
+        {img && <Image source={{ uri: img }} style={styles.image} />}
+
+        {description && <Text style={styles.description}>Description : {description}</Text>}
+      </View>
       
-      {img && <Image source={{ uri: img }} style={styles.image} />}
-      {description && <Text style={styles.description}>Description : {description}</Text>}
 
       { coordoneY && coordoneX && (
           <MapComponent latitude={coordoneX} longitude={coordoneY} />
@@ -128,7 +131,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10
+    marginBottom: -10
   },
   title: {
     fontSize: 30,
@@ -136,12 +139,19 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10
   },
+  imgDescContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 15
+  },
   description: {
-    fontSize: 17
+    fontSize: 17,
+    marginTop: 7,
+    flexShrink: 1,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 150,
+    height: 150,
     borderRadius: 8,
     marginTop: 10,
   },
