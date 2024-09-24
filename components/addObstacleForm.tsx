@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import ButtonWithIcon from './ButtonWithIcon';
-
+import ImagePickerComponent from './ImagePickerComponent'
 
 export default function addObstacleForm() {
     const [text, onChangeText] = useState('');
@@ -89,18 +89,11 @@ export default function addObstacleForm() {
         placeholder="Description de l'obstacle"
       />
 
-      <Text style={styles.label}>Url de l'image :</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setImgUrl}
-        value={imgUrl}
-        placeholder="Url de l'image"
-      />
-
       <View style={styles.locationContainer}>
 
       <View style={[{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginBottom: 10}]}>
       <Text style={styles.label}>Ajouter un Obstacle :</Text>
+        <View style={[{display: 'flex', flexDirection: 'row', gap: 10}]}>
         <ButtonWithIcon 
           onPress={getCurrentLocation} 
           iconName="navigate-circle-outline" 
@@ -109,6 +102,15 @@ export default function addObstacleForm() {
           width={50}
           title=''
         />
+        <ButtonWithIcon 
+          onPress={resetLongLat} 
+          iconName="close-circle-outline" 
+          color='#e63946'
+          iconColor='white'
+          width={50}
+          title=""
+        />
+        </View>
       </View>
       
 
@@ -129,15 +131,6 @@ export default function addObstacleForm() {
       />
       
       </View>
-      <ButtonWithIcon 
-          
-          onPress={resetLongLat} 
-          iconName="refresh-circle-outline" 
-          color='#e63946'
-          iconColor='white'
-          width={50}
-          title=""
-        />
       </View>
     
       <View style={[{marginTop: 20}]}>
@@ -150,16 +143,24 @@ export default function addObstacleForm() {
           width={150}
           title="Ajouter"
         />
+       
+
       </View>
-
-
+      <Text style={styles.label}>Url de l'image :</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setImgUrl}
+        value={imgUrl}
+        placeholder="Url de l'image"
+      />
+      <ImagePickerComponent/>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   formContainer: {
-    marginTop: 100,
+    marginTop: 50,
     padding: 20
   },
   locationContainer: {
