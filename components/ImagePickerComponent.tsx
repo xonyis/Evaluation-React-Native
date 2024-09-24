@@ -1,10 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Image, Button, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import ButtonWithIcon from './ButtonWithIcon';
 
-export default function ImagePickerComponent() {
+export default function ImagePickerComponent({ onImagePicked, resetImage }: { onImagePicked: (uri: string) => void, resetImage: boolean  }) {
   const [image, setImage] = useState<string | null>(null);
 
   const pickImage = async () => {
@@ -19,12 +20,25 @@ export default function ImagePickerComponent() {
     console.log(result);
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      const uri = result.assets[0].uri;
+
+      setImage(uri);
+      onImagePicked(uri);
+      
     }
   };
+
+  useEffect(() => {
+    if (resetImage) {
+      setImage(null);
+      onImagePicked('')
+    }
+  }, [resetImage]);
+
+
     return (
-            <View style={styles.buttonContent}>
-              <Button title="Pick an image from camera roll" onPress={pickImage} />
+            <View style={styles.container}>
+              <ButtonWithIcon title="" iconName='images-outline' color='#0066FF' iconColor='white' width={50} height={50} onPress={pickImage} />
               {image && <Image source={{ uri: image }} style={styles.image} />}
             </View>
     )
@@ -39,17 +53,20 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    buttonContent: {
-      flexDirection: 'row', // Mettre l'icône et le texte côte à côte
-      alignItems: 'center',
-    },
     container: {
-      flex: 1,
-      alignItems: 'center',
-      justifyContent: 'center',
+      marginTop: 20,
+      display: 'flex',
+      flexWrap: 'wrap',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      borderWidth: 1,
+      padding: 10,
+      borderRadius: 7
     },
     image: {
-      width: 200,
+      width: 250,
       height: 200,
+      // marginLeft: 10,
+      borderRadius: 7
     },
   });

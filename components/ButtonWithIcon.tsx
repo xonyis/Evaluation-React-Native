@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function ButtonWithIcon({onPress, title, iconName, color, iconColor, width}) {
+export default function ButtonWithIcon({onPress, title, iconName, color, iconColor, width, height}) {
 
     return (
-        <TouchableOpacity style={[styles.button, {backgroundColor: color, width: width}]} onPress={onPress}>
+        <TouchableOpacity style={[styles.button, {backgroundColor: color, width: width, height: height}]} onPress={onPress}>
             <View style={styles.buttonContent}>
                 <Ionicons name={iconName} size={30} color={iconColor} style={styles.icon} />
                 <Text style={styles.buttonText}>{title}</Text>

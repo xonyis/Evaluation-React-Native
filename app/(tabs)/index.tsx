@@ -2,6 +2,7 @@ import { Button, Image, StyleSheet, Text, FlatList, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import  React, {useState, useEffect} from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import ButtonWithIcon from '@/components/ButtonWithIcon';
 
 
 type Obstacle = {
@@ -53,13 +54,15 @@ export default function HomeScreen() {
 
   const Item = ({ name, description, img, id, coordoneY, coordoneX }: Obstacle) => (
     <View style={styles.item}>
-      <Button title="Supprimer" color="red" onPress={() => deleteObstacle(id)} />
-      <Text style={styles.title}>{id}</Text>
-      <Text style={styles.title}>{name}</Text>
-      <Text style={styles.title}>{description}</Text>
-      <Image source={{ uri: img }} style={styles.image} />
-      <Text style={styles.title}>Latitude : {coordoneX}</Text>
-      <Text style={styles.title}>Longitude : {coordoneY}</Text>
+      <View style={styles.itemHeader}>
+        <Text style={styles.title}>Obstacle : {name}</Text>
+        <ButtonWithIcon title="" color="red" onPress={() => deleteObstacle(id)} width={45} iconColor='white' iconName='close-circle-outline' />
+      </View>
+      <Text style={styles.description}>Description : {description}</Text>
+      <Text style={styles.description}>Latitude : {coordoneX}</Text>
+      <Text style={styles.description}>Longitude : {coordoneY}</Text>
+      
+      {img && <Image source={{ uri: img }} style={styles.image} />}
     </View>
   );
   
@@ -93,6 +96,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+
   },
   stepContainer: {
     gap: 8,
@@ -101,19 +105,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    marginTop: 30,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    borderWidth: 1,
+    borderRadius: 20,
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    display: 'flex',
+    gap: 10
+  },
+  itemHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10
   },
   title: {
-    fontSize: 32,
+    fontSize: 30,
+  },
+  description: {
+    fontSize: 20
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     borderRadius: 8,
+    marginTop: 10,
   },
 });

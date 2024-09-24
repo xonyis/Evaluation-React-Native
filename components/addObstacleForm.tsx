@@ -12,6 +12,7 @@ export default function addObstacleForm() {
     const [imgUrl, setImgUrl] = useState('');
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
+    const [resetImageFlag, setResetImageFlag] = useState(false);  // Flag pour réinitialiser l'image
 
     const obstacle = {
         id: Date.now(), 
@@ -66,6 +67,16 @@ export default function addObstacleForm() {
     setLatitude('')
     setLongitude('')
   }
+
+  const reset = () => {
+    onChangeText('');
+    setTextDescription('');
+    setImgUrl('');
+    setLatitude('')
+    setLongitude('')
+  }
+
+  
 
   return (
     <View style={styles.formContainer}>
@@ -132,8 +143,10 @@ export default function addObstacleForm() {
       
       </View>
       </View>
-    
-      <View style={[{marginTop: 20}]}>
+        
+      <ImagePickerComponent onImagePicked={setImgUrl} />
+      
+      <View style={[{marginTop: 20, display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}]}>
       <ButtonWithIcon 
           
           onPress={submitObstacle} 
@@ -144,16 +157,16 @@ export default function addObstacleForm() {
           title="Ajouter"
         />
        
-
+       <ButtonWithIcon 
+          
+          onPress={reset} 
+          iconName="close-circle-outline" 
+          color='#e63946'
+          iconColor='white'
+          width={150}
+          title="Reset"
+        />
       </View>
-      <Text style={styles.label}>Url de l'image :</Text>
-      <TextInput
-        style={styles.input}
-        onChangeText={setImgUrl}
-        value={imgUrl}
-        placeholder="Url de l'image"
-      />
-      <ImagePickerComponent/>
     </View>
   );
 }
