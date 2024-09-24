@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+    borderRadius: 10
   },
 });

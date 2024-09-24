@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
       borderRadius: 8,
       alignItems: 'center',
       justifyContent: 'center',
+      shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+      shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+      shadowOpacity: 1, // Opacité de l'ombre
+      shadowRadius: 9.51,
     },
     buttonContent: {
       flexDirection: 'row', // Mettre l'icône et le texte côte à côte

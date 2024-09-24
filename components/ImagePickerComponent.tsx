@@ -59,9 +59,13 @@ const styles = StyleSheet.create({
       flexWrap: 'wrap',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      borderWidth: 1,
       padding: 10,
-      borderRadius: 7
+      borderRadius: 7,
+      backgroundColor: 'white',
+      shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+    shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+    shadowOpacity: 1, // Opacité de l'ombre
+    shadowRadius: 9.51,
     },
     image: {
       width: 250,

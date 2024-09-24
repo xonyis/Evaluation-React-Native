@@ -56,12 +56,11 @@ export default function HomeScreen() {
     <View style={styles.item}>
       <View style={styles.itemHeader}>
         <Text style={styles.title}>Obstacle : {name}</Text>
-        <ButtonWithIcon title="" color="red" onPress={() => deleteObstacle(id)} width={45} iconColor='white' iconName='close-circle-outline' />
+        <ButtonWithIcon title="" color="" onPress={() => deleteObstacle(id)} width={45} iconColor='#e63946' iconName='close-circle-outline' />
       </View>
-      <Text style={styles.description}>Description : {description}</Text>
-      {/* <Text style={styles.description}>Latitude : {coordoneX}</Text>
-      <Text style={styles.description}>Longitude : {coordoneY}</Text> */}
+      
       {img && <Image source={{ uri: img }} style={styles.image} />}
+      {description && <Text style={styles.description}>Description : {description}</Text>}
 
       { coordoneY && coordoneX && (
           <MapComponent latitude={coordoneX} longitude={coordoneY} />
@@ -72,6 +71,8 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+            <Text style={styles.title}>Liste d'Obstacles</Text>
+
       {obstacles.length > 0 ? (
         <FlatList
           data={obstacles}
@@ -108,16 +109,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    marginTop: 30,
+    marginTop: 40,
   },
   item: {
-    borderWidth: 1,
-    borderRadius: 20,
-    padding: 20,
+    borderRadius: 15,
+    padding: 10,
     marginVertical: 8,
     marginHorizontal: 16,
     display: 'flex',
-    gap: 10
+    gap: 10,
+    backgroundColor: 'white',
+    shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+    shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+    shadowOpacity: 1, // Opacité de l'ombre
+    shadowRadius: 9.51,
   },
   itemHeader: {
     display: 'flex',
@@ -127,9 +132,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    marginBottom: 10
   },
   description: {
-    fontSize: 20
+    fontSize: 17
   },
   image: {
     width: 200,
@@ -137,4 +145,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginTop: 10,
   },
+  
 });

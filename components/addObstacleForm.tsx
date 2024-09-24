@@ -24,6 +24,17 @@ export default function addObstacleForm() {
 
     }
   const submitObstacle = async () => {
+
+    if (!text.trim()) {
+      alert("Veuillez entrer un nom pour l'obstacle.");
+      return;
+    }
+  
+    if (!latitude.trim() || !longitude.trim()) {
+      alert("Veuillez ajouter une localisation pour l'obstacle.");
+      return;
+    }
+
     try {
       const storedObstacles = await AsyncStorage.getItem('STORAGE_KEY');
       const obstacles = storedObstacles ? JSON.parse(storedObstacles) : [];
@@ -88,7 +99,8 @@ export default function addObstacleForm() {
     <View style={styles.formContainer}>
       <Text style={styles.title}>Ajouter un Obstacle</Text>
 
-      <Text style={[styles.label, {marginTop: 30}]}>Nom de l'obstacle :</Text>
+      <View style={styles.inputContainer}>
+      <Text style={[styles.label, {marginTop: 10}]}>Nom de l'obstacle :</Text>
 
       <TextInput
         style={styles.input}
@@ -105,11 +117,11 @@ export default function addObstacleForm() {
         value={textDescription}
         placeholder="Description de l'obstacle"
       />
-
+      </View>
       <View style={styles.locationContainer}>
 
       <View style={[{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center',marginBottom: 10}]}>
-      <Text style={styles.label}>Ajouter un Obstacle :</Text>
+      <Text style={styles.label}>Ajouter des Coordonées :</Text>
         <View style={[{display: 'flex', flexDirection: 'row', gap: 10}]}>
         <ButtonWithIcon 
           onPress={getCurrentLocation} 
@@ -164,7 +176,6 @@ export default function addObstacleForm() {
         />
        
        <ButtonWithIcon 
-          
           onPress={reset} 
           iconName="close-circle-outline" 
           color='#e63946'
@@ -187,15 +198,34 @@ const styles = StyleSheet.create({
   },
 
   formContainer: {
-    marginTop: 50,
+    marginTop: 30,
     padding: 20,
+    shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+    shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+    shadowOpacity: 1, // Opacité de l'ombre
+    shadowRadius: 9.51,
     
   },
   locationContainer: {
-    borderWidth: 1,
+    // borderWidth: 1,
+    backgroundColor: 'white',
     padding: 10,
     borderRadius: 7,
     marginTop: 10,
+    shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+    shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+    shadowOpacity: 1, // Opacité de l'ombre
+    shadowRadius: 9.51,
+  },
+  inputContainer: {
+    shadowColor: 'rgba(100, 100, 111, 0.2)', // Couleur de l'ombre
+    shadowOffset: { width: 0, height: 7 }, // Décalage de l'ombre
+    shadowOpacity: 1, // Opacité de l'ombre
+    shadowRadius: 9.51,
+    backgroundColor: 'white',
+    padding: 10,
+    borderRadius: 7,
+    marginTop: 20,
   },
   inputLocationContainer: {
     display: 'flex',
